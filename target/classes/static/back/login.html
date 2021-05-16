@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>杰辰购物管理系统登录</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- //for-mobile-apps -->
+    <script type="text/javascript" src="../js/axios.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<style type="text/css">
+		.main ul li{
+			display: block;width:100px;line-height: 40px;float:left;font-size: 20px;
+		}
+		.main ul li.student{
+			margin-left: 150px;
+		}
+	</style>
+</head>
+<body>
+    <!-- main -->
+    <div class="main">
+        <h1>
+           杰辰购物管理系统
+        </h1>  
+        <h3><i>JChen Shopping  Management System</i></h3>
+        <form id="loginForm">
+            <input type="text" v-model="account" value="用户名" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '用户名';}"
+                   required="">
+            <input type="password" v-model="pwd" value="Password" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '';}"
+                   required="">
+            <input type="button" value="登录" @click="login()">
+        </form>
+    </div>
+    
+    <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+   
+    <script type="text/javascript">
+    	let vue=new Vue({
+    		el:"#loginForm",
+    		data:{
+    			account:"",
+    			pwd:""
+    		},
+    		methods:{
+    			login(){
+    				var params=new URLSearchParams();
+    				params.append("account",this.account);
+    				params.append("pwd",this.pwd);
+    				axios.post("../admin/login",params).then(res=>{
+    					alert(res.data);
+    					if(res.data === "登录成功"){
+    						location.href="index.html";
+    					}
+    				});
+    			}
+    		}
+    	});
+    </script>
+</body>
+</html>
